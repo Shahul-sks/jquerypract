@@ -1,0 +1,152 @@
+﻿<head>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.2/default/default-main.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1114/js/kendo.all.min.js"></script>
+</head>
+
+
+<body>
+
+
+    <div class="card mt-lg-5">
+
+        <form name="myForm">
+            <div class="topp card-header text-center ">
+                <h1><strong> REGISTRATION FORM </strong>  </h1>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label> Name :  </label>
+                    <input type="text" id="name" name="fullname" class="text" placeholder="Enter Full Name" />
+                    <span id="spanuser" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label> Date Of Birth : </label>
+                    <input type="date" name="date" class="text" id="dob" />
+                    <span id="spandob" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label>
+                        State :
+                    </label>
+                    <select class="text dropdown-toggle dropdown-toggle-split" id="state">
+
+                        <option value="Select State">Select</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="MP">MP</option>
+                        <option value="UP">UP</option>
+                        <option value="North-East">North-East</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span id="spanstate" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label>
+                        Gender :
+                    </label>
+
+                    <input class="form-check-input" type="radio" value="M" name="gender" id="male">
+                    <span id="spangender" class="text-danger"></span>
+                    <label class="form-check-label">
+                        Male
+                    </label>
+                    <input class="form-check-input" type="radio" value="F" name="gender" id="female">
+                    <label class="form-check-label">
+                        Female
+                    </label>
+                    <input class="form-check-input" type="radio" value="O"  name="gender" id="other">
+                    <label class="form-check-label">
+                        Other
+                    </label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <label> Mobile:  </label>
+                    <input type="text" name="mobile" class="text" placeholder="Enter Mobile No" id="mobile" />
+                    <span id="spanmobile" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    Email:
+                    <input type="email" id="email" name="mail" class="text" placeholder="Enter E-Mail ID" />
+                    <span id="spanmail" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    Password:
+                    <input type="Password" id="password" name="pass" class="text" placeholder="Enter Password" />
+                    <span id="spanpass" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    Re-Type:
+                    <input type="Password" id="confirmpass" name="conpass" class="text" placeholder="Confirm Password" />
+                    <span id="spanconpass" class="text-danger"></span><br>
+                </div>
+            </div>
+
+            Address :
+            <br>
+            <textarea class="text w-100" value="address" id="address"></textarea>
+            <span id="spanaddress" class="text-danger"></span><br>
+          
+            <button type="button" id="btn" class="btn button btn-outline-success" > SUBMIT </button>
+        </form>
+
+    </div>
+</body>
+
+<script>
+    $("#btn").click(function click() {
+        
+      
+        const name = $('#name').val();
+        const dob = $('#dob').val();
+        const state = $('#state').val();
+        const gender = $('input[name="gender"]:checked').val();
+        const mobile = $('#mobile').val();
+        const email = $('#email').val();
+        const password = $('#password').val();
+        const confirmpass = $('#confirmpass').val();
+        const address = $('#address').val();
+
+        const userData = {
+            name: name,
+            dob: dob,
+            state: state,
+            gender: gender,
+            mobile: mobile,
+            email: email,
+            password: password,
+            confirmpass: confirmpass,
+            address: address
+
+        }
+
+        $.ajax({
+            url: '/kendo/signup',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(userData),
+            success: function (response) {
+                alert(response.message);
+            },
+            error: function () {
+                alert('Error registering user. Please try again.');
+            }
+        });
+    } );
+
+   
+</script>
+
+
+
+
+

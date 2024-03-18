@@ -1,0 +1,340 @@
+﻿<head>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.2/default/default-main.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1114/js/kendo.all.min.js"></script>
+</head>
+
+<body>
+    <h1>Kendo UI DatePicker Example</h1>
+
+
+    <div class="card mt-lg-5" id="cardbox">
+
+        <form name="myForm">
+            <div class="topp card-header text-center ">
+                <h1>
+                    <strong>
+                        <input id="foreground-picker"  />
+                         REGISTRATION FORM
+                        <input id="background-picker" />
+                    </strong>
+                </h1>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <label> Name :  </label>
+                    <input id="textbox" placeholder="Enter Full Name" required />
+                  @*   <span id="spanuser" class="text-danger"></span> *@
+                </div>
+                <div class="col">
+                    @*  <label> Date Of Birth : </label> *@
+                    <label> Date Of Birth :  </label>
+                    <input id="datepicker" placeholder="MM/DD/YYYY"/>
+                    <span id="spandob" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label> Regn No :  </label>
+                    <input id="regnno" required />
+                    @*   <span id="spanuser" class="text-danger"></span> *@
+                </div>
+                
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                   @* 
+                    <input id="kd-place-chooser" class="text dropdown-toggle dropdown-toggle-split"></input>   *@               
+                   @*  <input id="dynamicdrop" class="text dropdown-toggle dropdown-toggle-split"></input> *@
+                    <input id="state" />
+
+                </div>
+
+                <div class="col">
+                    <input id="city" />
+                </div>
+
+
+                <div class="col">
+                    <label>
+                        Gender :
+                    </label>
+@*                     <span id="spangender" class="text-danger"></span>
+ *@                    <label class="form-check-label">                  
+                    </label>
+                    <input type="radio" name="gender" id="male" />
+                    <label class="form-check-label">             
+                    </label>
+                    <input type="radio" name="gender" id="female" />
+                    <label class="form-check-label">
+                        <input type="radio" name="gender" id="other" />
+                    </label>
+                </div>
+            </div>
+
+            <div class="row mt-2" >
+                <div class="col">
+                    <label> Mobile:  </label>
+                    <input id="textbox1" placeholder="Enter Mobile Number" type="number" />
+                    @* <span id="spanmobile" class="text-danger"></span> *@
+                </div>
+                <div class="col">
+                    Email:
+                    <input id="textbox2"  />
+                 @*    <span id="spanmail" class="text-danger"></span> *@
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    Password:
+                    <input id="textbox3" type="password" />
+                    <span id="spanpass" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    Re-Type:
+                    <input id="textbox4" type="password" />
+                     <span id="spanconpass" class="text-danger"></span><br>
+                </div>
+            </div>
+
+            <br>
+            <textarea id="description" style="width:100%"></textarea>
+           @*  <span id="spanaddress" class="text-danger"></span><br> *@
+          
+
+            <label>
+                <input type="checkbox" id="eq1">
+                <span></span>
+                All the details is correct and I accept all the <a href="https://xtranetindia.com/">Terms And Condiiton.</a>
+            </label>          
+            <button type="submit" class="btn button" id="btn" onclick="submitForm()"> SUBMIT </button>
+        </form>
+
+    </div>
+
+           
+
+    <script>
+
+
+
+
+        //datepicker
+        $("#datepicker").kendoDatePicker(); 
+        
+        var datepicker = $("#datepicker").data("kendoDatePicker");
+        
+        datepicker.max(new Date(2010, 0, 1));
+        datepicker.min(new Date(1970, 0, 1));
+
+
+       //textbox
+        $("#regnno").kendoTextBox({
+            readonly: true,              
+            value: "RGN0000123"
+        });
+        $("#textbox1").kendoTextBox({   
+            placeholder: "Enter Mobile No...",
+            rounded: "full"
+        });
+        $("#textbox2").kendoTextBox({
+            placeholder: "Enter EmailId...",
+                    rounded: "full"
+        });
+        $("#textbox3").kendoTextBox({
+            placeholder: "Enter Password..",
+                    rounded: "full"
+        });
+        $("#textbox4").kendoTextBox({
+            placeholder: "Confirm Password...",
+                    rounded: "full"
+        });
+        //radio
+        $('#male').kendoRadioButton({
+            label: "MALE"
+        })
+        $('#female').kendoRadioButton({
+            label: "FEMALE"
+        })
+        $('#other').kendoRadioButton({
+            label: "OTHER"
+        })
+
+
+
+        //dropdown list tree
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            sort: { field: "cityName", dir: "asc" },
+            data: [
+                {
+                    cityId: 1, cityName: "BIHAR", items: [
+                        { cityId: 2, cityName: "Patna" },
+                        { cityId: 3, cityName: "Muzaffarpur" },
+                        { cityId: 4, cityName: "Darbhanga" }
+                    ]
+                },
+                {
+                    cityId: 5, cityName: "Madhya Pradesh", items: [
+                        { cityId: 6, cityName: "Bhopal" },
+                        { cityId: 7, cityName: "Indore" },
+                        { cityId: 8, cityName: "Ujjain" }
+                    ]
+                },
+                {
+                    cityId: 13, cityName: "Meghalaya", items: [
+                        { cityId: 14, cityName: "Shillong" },
+                        { cityId: 15, cityName: "Tura" }
+                    ]
+                },
+                {
+                    cityId: 16, cityName: "Other State", items: [
+                        { cityId: 18, cityName: "Other" },                     
+                    ]
+                }
+            ]
+        });
+
+        //dropdownlist
+        $("#kd-place-chooser").kendoDropDownTree({
+            placeholder: " Select Your State or city ...",
+            height: "auto",
+            dataSource: dataSource,
+            dataValueField: "cityId",
+            dataTextField: "cityName",
+        });
+
+        //
+        //dropdownlist using OData
+        function dropdownlist_change(e) {
+            var value = this.value();
+            // Handle the change event
+        }
+
+        var state = $("#state").kendoDropDownList({
+            optionLabel: "Select State...",
+            dataSource: {           
+               // serverFiltering: true,
+                transport: {
+                    read: "/Kendo/GetData"
+                }
+            },
+
+            dataTextField: "name",
+            dataValueField: "id",
+            filter: "startswith",
+            filtering: function (e) {
+                var filter = e.filter;
+            }
+        }).data("kendoDropDownList");
+        
+
+
+
+
+        var city = $("#city").kendoDropDownList({
+            autoBind: true,
+            cascadeFrom: "state",
+            optionLabel: "Select City...",
+            dataTextField: "name",
+            dataValueField: "cityid",           
+            dataSource: {                
+                transport: {
+                    read: "/Kendo/GetData2"
+                },
+                // create: {
+                //     url: /Kendo/Createdrop",
+                //     dataType: "jsonp"
+                // },
+            },
+            filter: "startswith",
+            filtering: function (e) {
+                var filter = e.filter;
+            }
+        }).data("kendoDropDownList");
+
+        //textarea
+        $("#description").kendoTextArea({
+                label: {
+                    content: "Address",
+                    floating: true,
+                    maxLength:200
+                },
+            rows: 3, rounded: "full",
+                
+        });
+
+        //checkbox
+        $('#eq1').kendoCheckBox({
+            checked: false,
+            label: ""
+        });
+
+        //colorpicker
+        var foregroundColor = $('.body').css("color");
+        var backgroundColor = $('.body').css("background-color");
+        $("#foreground-picker").kendoColorPicker({
+            opacity: true,
+            rounded: "full",
+            value: foregroundColor,
+            contrastTool: {
+                backgroundColor: backgroundColor
+            },
+            select: function (e) {
+                $("#cardbox").css("color", e.value);
+            }
+        });
+
+        $("#background-picker").kendoColorPicker({
+            opacity: true,
+            rounded: "full",
+            value: backgroundColor,
+            input: false,
+            views: ["gradient"],
+            select: function (e) {
+                $("#cardbox").css("background-color", e.value);
+            },
+            change: function (e) {
+                var foregroundPicker = $("#foreground-picker").data("kendoColorPicker")
+                foregroundPicker.setBackgroundColor(e.value)
+            }
+        });
+
+
+    </script>
+@* 
+    //try for adding new data into dropdown *@
+
+  
+
+    @* <script>
+        function addNew(widgetId, value) {
+            var widget = $("#" + widgetId).getKendoDropDownList();
+            var dataSource = widget.dataSource;
+
+            if (confirm("Are you sure?")) {
+                dataSource.add({
+                    cityid: 0,
+                    name: value
+                });
+
+                dataSource.one("sync", function () {
+                    widget.select(dataSource.view().length - 1);
+                });
+
+                dataSource.sync();
+            }
+        };
+    </script>
+
+    *@
+    <script id="noDataTemplate" type="text/x-kendo-tmpl">
+        <div>
+            No data found. Do you want to add new item - '#: instance.filterInput.val() #' ?
+        </div>
+        <br />
+        <button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" onclick="addNew('#: instance.element[0].id #', '#: instance.filterInput.val() #')">Add new item</button>
+    </script>
+
+</body>

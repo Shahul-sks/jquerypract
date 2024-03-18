@@ -1,0 +1,171 @@
+﻿<head>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.2/default/default-main.css" />
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1114/js/kendo.all.min.js"></script>
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/7.0.2/default/default-ocean-blue.css" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2023.3.1114/js/kendo.all.min.js"></script>
+
+
+</head>
+
+<body>
+    <h1>Kendo UI ListView Implementation</h1>
+
+@* 
+    <div id="listView"></div>
+
+
+
+    <div id="listView" style="max-height:400px;overflow:auto;"></div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div class="product">
+             <img src="https://demos.telerik.com/kendo-ui/content/web/foods/#= ProductID #.jpg" alt="Kendo UI for jQuery ListView #: ProductName # " />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+        </div>
+    </script>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Products",
+                    dataType: "jsonp"
+                }
+            }
+        });
+
+        $("#listView").kendoListView({
+            dataSource: dataSource,
+            template: kendo.template($("#template").html()),
+            pageable: true,
+            pageSize: 5,
+            scrollable: true,
+            height: 400
+        });
+    </script>
+
+
+
+ *@
+
+
+
+    <div id="listView"></div>
+    <script>
+        $("#listView").kendoListView({
+            // Add some basic configurations such as height.
+            height: 400
+        });
+    </script>
+
+
+
+
+    <script>
+        var product = [{
+            ProductID: 1,
+            ProductName: "Chai",
+            UnitPrice: 18.0000
+        }, {
+            ProductID: 2,
+            ProductName: "Chang",
+            UnitPrice: 19.0000
+        }, {
+            ProductID: 3,
+            ProductName: "Aniseed Syrup",
+            UnitPrice: 10.0000
+        }, {
+            ProductID: 4,
+            ProductName: "Chef Anton's Cajun Seasoning",
+            UnitPrice: 22.0000
+        }, {
+            ProductID: 5,
+            ProductName: "Chef Anton's Gumbo Mix",
+            UnitPrice: 21.3500
+        }, {
+            ProductID: 6,
+            ProductName: "Grandma's Boysenberry Spread",
+            UnitPrice: 25.0000,
+        }, {
+            ProductID: 7,
+            ProductName: "Uncle Bob's Organic Dried Pears",
+            UnitPrice: 30.0000
+        }, {
+            ProductID: 8,
+            ProductName: "Northwoods Cranberry Sauce",
+            UnitPrice: 40.0000
+        }, {
+            ProductID: 9,
+            ProductName: "Mishi Kobe Niku",
+            UnitPrice: 97.0000
+        }, {
+            ProductID: 10,
+            ProductName: "Ikura",
+            UnitPrice: 31.0000
+        }, {
+            ProductID: 11,
+            ProductName: "Queso Cabrales",
+            UnitPrice: 21.0000
+        }, {
+            ProductID: 12,
+            ProductName: "Queso Manchego La Pastora",
+            UnitPrice: 38.0000
+        }, {
+            ProductID: 13,
+            ProductName: "Konbu",
+            UnitPrice: 6.0000
+        }, {
+            ProductID: 14,
+            ProductName: "Tofu",
+            UnitPrice: 23.2500
+        }, {
+            ProductID: 15,
+            ProductName: "Genen Shouyu",
+            UnitPrice: 15.5000
+        }];
+
+        $(function () {
+            $("#listView").kendoListView({
+                dataSource: {
+                    data: product
+                },
+                height: 400
+            });
+        });
+    </script>
+
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <h3>Product Name</h3>
+            <p>#:ProductName#</p>
+            <h3>Price</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
+        </div>
+    </script>
+
+    <script>
+        $(function () {
+            $("#listView").kendoListView({
+                template: kendo.template($("#template").html()), // Provide a template to the ListView configuration.
+                height: 400
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+</body>

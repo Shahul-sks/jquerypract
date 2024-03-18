@@ -1,0 +1,73 @@
+﻿
+ 
+<body>
+
+    <div class="card mt-lg-5">
+
+        <form name="myForm" method="post" action="@Url.Action("Login", "Kendo")">
+            <div class="topp card-header text-center ">
+                <h1><strong> Welcome To Login Page </strong>  </h1>
+            </div>
+
+            <div class="row">
+                <div class="text-center">
+                    <img src="https://i.pinimg.com/originals/26/61/9c/26619c16b5451afaa95956dff93ae3e5.jpg" class="rounded-circle" height="200px" width="200px">
+                </div>           
+            </div>    
+           
+            <div class="row mt-4" id="text1">            
+                <input name="mailid" class="form-control" size="10" type="text" placeholder="Enter Email-id.....">
+            </div>
+            <div class="row mt-2" id="text2">
+                <input class="form-control" size="10" name="password" type="password" placeholder="Enter PassWord......">               
+            </div>  
+            
+            <div class="row mt-2">
+                <button type="submit" class="btn button btn-outline-success"> SUBMIT </button>
+            </div>
+
+       </form>
+
+    </div>
+
+   
+
+   @*  <script>
+        function data() {
+            debugger;
+            const mailid = $('#mailid').val();
+            const password = $('#password').val();
+
+            const userData = {
+                mailid: mailid,
+                password: password
+            };
+
+            $.ajax({
+                url: '/kendo/register',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(userData),
+                success: function (response) {
+                    alert(response.message);
+                    // You can redirect the user or perform other actions based on the response
+                },
+                error: function () {
+                    alert('Error registering user. Please try again.');
+                }
+            });
+        }
+    </script> *@
+
+
+
+
+
+
+
+
+
+
+
+
+</body>

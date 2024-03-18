@@ -1,0 +1,136 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendo UI ListView and GridView Example</title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.301/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.301/styles/kendo.default.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://kendo.cdn.telerik.com/2022.1.301/js/kendo.all.min.js"></script>
+
+</head>
+<body>
+
+    <h2>List View </h2>
+
+    <div class="row">
+        <div class="col">
+            <h2>List of Dot Net Trainee</h2>
+        </div>
+        <div class="col" >
+            <div id="listView" style="width:fit-content; height:fit-content; position:center" wi></div>
+        </div>
+    </div>
+
+    <input id="colorPicker" />
+
+    <h2>Grid View Example</h2>
+    <button id="add">Add a new row</button>
+    <div id="gridView" ></div>
+   
+
+    <script>
+        var listViewData = [
+            { id: 1, name: 'Shahul Singh' },
+            { id: 2, name: 'Muskan Gangrade' },
+            { id: 3, name: 'Vijay Kumar' },
+            { id: 4, name: 'Govind Kumar' },
+            { id: 5, name: 'Akash Kumar' }
+        ];
+
+        $("#listView").kendoListView({
+            dataSource: listViewData,
+            template: "<div>${id}  ${name}</div>"
+        });
+
+
+
+
+        var gridViewData = [
+            { id: 1, name: 'Shahul Singh', location: 'Bihar' },
+            { id: 2, name: 'Vijay Kumar', location: 'Bihar' },
+            { id: 3, name: 'Akash Kumar', location: 'Kolkata' },
+            { id: 4, name: 'Muskan Gangrade', location: 'MP' },
+            { id: 5, name: 'Govind', location: 'MP' },
+            { id: 6, name: 'Gajendra', location: 'UP' },
+            { id: 7, name: 'Aakansha', location: 'Mumbai' },
+            { id: 8, name: 'Shivam', location: 'Haryana' },
+            { id: 9, name: 'Rubina', location: 'Delhi' },
+            { id: 10, name: 'Manisha', location: 'MP' },
+
+        ]
+            
+
+
+        $("#colorPicker").kendoColorPicker({
+
+            change: function (e) {
+                var selectedColor = e.value;
+
+                $("#gridView").css("background-color", selectedColor);
+            },
+            views: ["palette"],
+            preview: true,
+            palette: "basic"
+
+        });
+
+        $("#gridView").kendoGrid({
+            dataSource: {
+                data: gridViewData,
+
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: { type: "number" },
+                            name: { type: "string" },
+                            location: { type: "string" }
+                           
+                        }
+                       
+                    }
+                }
+            },
+            columns: [
+                { field: "id", title: "ID" },
+                { field: "name", title: " Trainee Name" },
+                { field: "location", title: "Location" }             
+            ],
+            height: 350,
+            groupable: true,
+            sortable: true,
+            filterable: true,
+            editable: true,
+            toolbar: ["save"],
+            resizable: true,
+            pageable: {
+                 refresh: true,
+                pageSizes: true,
+            }
+
+
+        });
+
+
+
+        $("#add").kendoButton({
+            themeColor: "success",
+            click: function () {
+                var grid = $("#gridViewData").data("kendoGrid");
+                grid.addRow();
+            }
+        });
+
+        $("#export").click(function (e) {
+            var grid = $("#gridView").data("kendoGrid");
+            grid.saveAsPDF();
+        });
+
+    </script>
+    <button id="export">Export to PDF</button>
+
+</body>
+</html>
